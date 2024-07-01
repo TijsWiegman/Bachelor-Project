@@ -21,7 +21,7 @@ logfile = 'logfile'
 
 # Create empty .json file named logs
 load = 'logs'
-file_path = f'./logs/{load}.json'
+file_path = f'./{load}.json'
 
 os.makedirs(os.path.dirname(file_path), exist_ok=True)
 
@@ -55,17 +55,17 @@ else:
 
 # Rename the logs file so it does not get overwritten before loading
 if load != None:
-    os.rename(f'./logs/{load}.json', f'./logs/{load}_old.json')
+    os.rename(f'./{load}.json', f'./{load}_old.json')
 
 # Make a logger to save the simulated points
 # Caveat: The logger will not look back at previously probed points.
-logger = JSONLogger(path=f'./logs/{logfile}.json')
+logger = JSONLogger(path=f'./{logfile}.json')
 optimizer.subscribe(Events.OPTIMIZATION_STEP, logger)
 probed_points = {}
 
 # Load in old logs
 if load != None:
-    load_logs(optimizer, logs=[f'./logs/{load}_old.json'])
+    load_logs(optimizer, logs=[f'./{load}_old.json'])
 
 # Get parameters and temperatures from the optimizer to store them in the probed points
 params = np.array([res['params'][v] for res in optimizer.res for v in res['params']]).reshape(-1,len(pbounds))
@@ -73,7 +73,7 @@ obs = np.array([res['target'] for res in optimizer.res])
 probed_points = {tuple(row): obs[idx] for idx, row in enumerate(params)}
 
 # Remove the old log file
-os.remove(f'./logs/{load}_old.json')
+os.remove(f'./{load}_old.json')
 
 # Make the LHS with correct boundaries
 sampler = qmc.LatinHypercube(d=len(pbounds),seed=0)
