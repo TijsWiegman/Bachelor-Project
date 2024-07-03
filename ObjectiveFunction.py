@@ -17,7 +17,6 @@ def objective_function(h, p, r):
         model.solve()
 
         # Select the volume average temperature evaluation
-        #target = model/'evaluations'/'Volume Average 1'
         target = model/'evaluations'/'Reflectance (ewfd)'
 
         # Return the recalculated temperature
