@@ -1,0 +1,1 @@
+This folder contains the documents used in the sections 4.5 and 4.6 of my thesis. With 3D we mean this folder corresponds to the problem in the full 3 dimensional search space, where we experimented with different exploration parameters and acquisition functions. On how to use the code, see the tutorial.
