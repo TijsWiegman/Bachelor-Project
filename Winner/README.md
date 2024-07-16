@@ -1,0 +1,1 @@
+This folder contains the documents used in section 4.8 of my thesis. The .json file is that of the best performing run with the highest target value of the entire project. The .py file is used to create the 3D animation seen in the thesis.
