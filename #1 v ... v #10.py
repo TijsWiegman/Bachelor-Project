@@ -3,8 +3,6 @@ import json
 import matplotlib.pyplot as plt
 import numpy as np
 
-X = np.linspace(1,250,250)
-
 script_dir = os.path.dirname(__file__)
 
 file_names = ['ei xi=0', 'mei xi=1E-4', 'mei xi=1E-2', 'mei xi=0.1', 'dmei', 'lhs random']
