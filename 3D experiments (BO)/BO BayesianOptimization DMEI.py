@@ -40,7 +40,7 @@ for i in range(1,11):
 
     # Set the boundaries and steps for the optimization in alphabetical order
     pbounds = {'h': (15, 60), 'p': (100, 1000), 'r': (15, 150)}
-    steps = {'h': 1, 'p': 1, 'r': 1}  # WHY THIS STEP SIZE????
+    steps = {'h': 1, 'p': 1, 'r': 1}
 
     # Initializing the BayesianOptimization object
     optimizer = BayesianOptimization(f=None, pbounds=pbounds,allow_duplicate_points=True)
