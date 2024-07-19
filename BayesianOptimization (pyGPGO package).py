@@ -7,9 +7,7 @@ from pyGPGO.acquisition import Acquisition
 from pyGPGO.surrogates.GaussianProcess import GaussianProcess
 from pyGPGO.logger import EventLogger
 from pyGPGO.GPGO import GPGO
-import matplotlib.pyplot as plt
 from scipy.stats import qmc
-from matplotlib.animation import FuncAnimation
 from scipy.stats import norm
 from datetime import datetime
 import logging
