@@ -12,7 +12,7 @@ from scipy.stats import qmc
 # Set the COMSOL model you want to load as a string
 comsol = 'Toy problem v2'  # was None
 
-for i in range(10,11):
+for i in range(1,11):
     # Set different random seed for each
     np.random.seed(seed=i)
 
