@@ -14,7 +14,7 @@ np.random.seed(seed=0)
 # Set the COMSOL model you want to load as a string
 comsol = 'Toy problem v2'  # was None
 
-for i in range(6,11):
+for i in range(1,11):
     # Set the filename of the logs file as a string
     logfile = 'mei #'+str(i)
 
