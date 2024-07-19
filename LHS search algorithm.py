@@ -2,18 +2,12 @@
 import mph
 import os
 import numpy as np
-from bayes_opt import BayesianOptimization
-from bayes_opt.logger import JSONLogger
-from bayes_opt.event import Events
-from bayes_opt.util import load_logs
-from bayes_opt import UtilityFunction
 from scipy.stats import qmc
 
 # Set the COMSOL model you want to load as a string
 comsol = 'Toy problem v2'  # was None
 
-for i in range(10,11):
-    print(i)
+for i in range(1,11):
     # Set different random seed for each
     np.random.seed(seed=i)
 
@@ -29,20 +23,12 @@ for i in range(10,11):
     with open(file_path, 'w') as file:
         pass
 
-    """
-    # Set the logs filename that you want to load as a string
-    load = 'logs'   # Was None
-    """
-
     # Set the number of total simulations
     total_sims = 250
 
     # Set the boundaries and steps for the optimization in alphabetical order
     pbounds = {'h': (15, 60), 'p': (100, 1000), 'r': (15, 150)}
-    steps = {'h': 1, 'p': 1, 'r': 1}  # WHY THIS STEP SIZE????
-
-    # Initializing the BayesianOptimization object
-    optimizer = BayesianOptimization(f=None, pbounds=pbounds,allow_duplicate_points=True)
+    steps = {'h': 1, 'p': 1, 'r': 1}
 
     # Define the COMSOL model
     client = mph.start()
@@ -59,15 +45,7 @@ for i in range(10,11):
     if load != None:
         os.rename(f'./{load}.json', f'./{load}_old.json')
 
-    # Make a logger to save the simulated points
-    # Caveat: The logger will not look back at previously probed points.
-    logger = JSONLogger(path=f'./{logfile}.json')
-    optimizer.subscribe(Events.OPTIMIZATION_STEP, logger)
     probed_points = {}
-
-    # Load in old logs
-    if load != None:
-        load_logs(optimizer, logs=[f'./{load}_old.json'])
 
     # Get parameters and temperatures from the optimizer to store them in the probed points
     params = np.array([res['params'][v] for res in optimizer.res for v in res['params']]).reshape(-1,len(pbounds))
