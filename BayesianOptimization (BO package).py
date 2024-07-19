@@ -86,7 +86,6 @@ samples = qmc.scale(samples, l_bounds, u_bounds)
 for s in samples:
     # Round the parameters to the step sizes
     params = {p: round(s[idx]/steps[p])*steps[p] for (idx, p) in enumerate(pbounds)}
-    print(params)
 
     # Simulate the rounded parameters
     target = objective_function(**params)
@@ -103,8 +102,6 @@ for _ in range(total_sims - samples.shape[0]):
     # Round the given parameters to step sizes
     round_next_point = {p: round(v/steps[p])*steps[p] for (p, v) in next_point.items()}
     round_params = tuple(round_next_point.values())
-
-    print(round_params)
 
     # See if the rounded parameters are already simulated
     if round_params in probed_points:
