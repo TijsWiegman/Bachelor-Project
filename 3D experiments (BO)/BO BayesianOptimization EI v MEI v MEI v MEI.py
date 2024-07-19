@@ -19,7 +19,7 @@ xi_values = [0,1E-4,1E-2,0.1]
 
 for i in range(4):
     file_name = file_names[i]
-    for j in range(6,11):
+    for j in range(1,11):
         # Set the filename of the logs file as a string
         logfile = file_name+' #'+str(j)
         print(logfile)
