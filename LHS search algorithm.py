@@ -1,7 +1,11 @@
 # Import the required libraries
-import mph
 import os
 import numpy as np
+from bayes_opt import BayesianOptimization
+from bayes_opt.logger import JSONLogger
+from bayes_opt.event import Events
+from bayes_opt.util import load_logs
+from bayes_opt import UtilityFunction
 from scipy.stats import qmc
 
 # Set the COMSOL model you want to load as a string
