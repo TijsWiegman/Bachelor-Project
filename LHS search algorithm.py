@@ -1,4 +1,5 @@
 # Import the required libraries
+import mph
 import os
 import numpy as np
 from bayes_opt import BayesianOptimization
@@ -11,7 +12,7 @@ from scipy.stats import qmc
 # Set the COMSOL model you want to load as a string
 comsol = 'Toy problem v2'  # was None
 
-for i in range(1,11):
+for i in range(10,11):
     # Set different random seed for each
     np.random.seed(seed=i)
 
@@ -34,6 +35,9 @@ for i in range(1,11):
     pbounds = {'h': (15, 60), 'p': (100, 1000), 'r': (15, 150)}
     steps = {'h': 1, 'p': 1, 'r': 1}
 
+    # Initializing the BayesianOptimization object
+    optimizer = BayesianOptimization(f=None, pbounds=pbounds,allow_duplicate_points=True)
+
     # Define the COMSOL model
     client = mph.start()
 
@@ -49,7 +53,15 @@ for i in range(1,11):
     if load != None:
         os.rename(f'./{load}.json', f'./{load}_old.json')
 
+    # Make a logger to save the simulated points
+    # Caveat: The logger will not look back at previously probed points.
+    logger = JSONLogger(path=f'./{logfile}.json')
+    optimizer.subscribe(Events.OPTIMIZATION_STEP, logger)
     probed_points = {}
+
+    # Load in old logs
+    if load != None:
+        load_logs(optimizer, logs=[f'./{load}_old.json'])
 
     # Get parameters and temperatures from the optimizer to store them in the probed points
     params = np.array([res['params'][v] for res in optimizer.res for v in res['params']]).reshape(-1,len(pbounds))
