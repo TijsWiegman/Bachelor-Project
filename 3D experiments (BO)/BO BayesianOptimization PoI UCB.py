@@ -17,7 +17,7 @@ comsol = 'Toy problem v2'  # was None
 kinds = ['poi','ucb']
 
 for i in range(2):
-    for j in range(5,11):
+    for j in range(1,11):
 
         # Set the filename of the logs file as a string
         logfile = kinds[i]+' #'+str(j)
